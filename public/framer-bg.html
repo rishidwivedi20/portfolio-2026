@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    body, html { 
+      margin: 0; 
+      padding: 0; 
+      width: 100%; 
+      height: 100%; 
+      overflow: hidden; 
+      background: #050505; /* Fallback dark background */
+    }
+    #root { 
+      width: 100%; 
+      height: 100%; 
+    }
+  </style>
+  <script type="importmap">
+    {
+      "imports": {
+        "react": "https://esm.sh/react@18.2.0",
+        "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+        "react/jsx-runtime": "https://esm.sh/react@18.2.0/jsx-runtime",
+        "framer": "https://esm.sh/framer@2.4.1?external=react,react-dom",
+        "framer-motion": "https://esm.sh/framer-motion@10.12.16?external=react,react-dom"
+      }
+    }
+  </script>
+</head>
+<body>
+  <div id="root"></div>
+  <script type="module">
+    import React from 'react';
+    import { createRoot } from 'react-dom/client';
+    
+    // Exact external import as requested
+    import BackgroundBoxes from 'https://framer.com/m/Basebox-aaFo.js@0d3IZgcUQU3VbzZYQrFC';
+
+    const root = createRoot(document.getElementById('root'));
+    root.render(React.createElement(BackgroundBoxes, { 
+      style: { width: '100%', height: '100%' } 
+    }));
+  </script>
+</body>
+</html>

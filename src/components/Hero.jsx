@@ -1,79 +1,71 @@
 import { motion } from 'framer-motion';
+import { Typewriter } from 'react-simple-typewriter';
+import CommandButton from './CommandButton';
+import ScrollIndicator from './ScrollIndicator';
+import { staggerContainer, slideUpItem } from '../utils/animations';
 
 const Hero = () => {
   return (
     <section className="section" style={{ minHeight: '90vh', display: 'flex', alignItems: 'center' }}>
       <div className="container">
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          variants={staggerContainer}
+          initial="hidden"
+          animate="show"
           style={{ maxWidth: '800px' }}
         >
-          <motion.h1 
-            style={{ 
-              fontSize: 'clamp(3rem, 8vw, 6rem)', 
-              lineHeight: 1.05, 
-              letterSpacing: '-0.04em',
-              marginBottom: '1.5rem',
-              color: 'var(--text-primary)'
-            }}
-          >
-            Rishi Dwivedi. <br />
-            <span style={{ color: 'var(--text-muted)' }}>Software Engineer.</span>
-          </motion.h1>
+          <motion.div variants={slideUpItem}>
+            <h1 
+              style={{ 
+                fontSize: 'clamp(3rem, 8vw, 6rem)', 
+                lineHeight: 1.05, 
+                letterSpacing: '2px',
+                marginBottom: '1rem',
+                color: 'var(--text-primary)',
+                fontFamily: 'var(--font-heading)'
+              }}
+            >
+              RISHI DWIVEDI.
+            </h1>
+          </motion.div>
           
-          <motion.p
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4, duration: 0.8 }}
+          <motion.div
+            variants={slideUpItem}
             style={{ 
               fontSize: 'clamp(1.1rem, 2vw, 1.4rem)', 
               color: 'var(--text-secondary)',
-              maxWidth: '600px',
-              lineHeight: 1.6,
-              marginBottom: '3rem'
+              height: '2.5rem', // Fixed height to prevent layout shift during typing
+              marginBottom: '3rem',
+              fontFamily: 'var(--font-mono)',
+              display: 'flex',
+              alignItems: 'center'
             }}
           >
-            B.Tech CSE (AI) student crafting robust full-stack applications. 
-            Obsessed with clean code, scalable architecture, and pixel-perfect interfaces.
-          </motion.p>
+            <Typewriter
+              words={[
+                'Software Engineer',
+                'Thinking in Systems. Creating with code.',
+                'Competitive Coder'
+              ]}
+              loop={0}
+              cursor
+              cursorStyle='_'
+              typeSpeed={40}
+              deleteSpeed={20}
+              delaySpeed={1000}
+            />
+          </motion.div>
           
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.6, duration: 0.8 }}
+            variants={slideUpItem}
             style={{ display: 'flex', gap: '1.5rem', alignItems: 'center' }}
           >
-            <a 
-              href="mailto:rishidwi2003@gmail.com" 
-              className="interactive"
-              style={{
-                padding: '1rem 2rem',
-                backgroundColor: 'var(--text-primary)',
-                color: 'var(--bg-dark)',
-                borderRadius: 'var(--radius-sm)',
-                fontWeight: 600,
-                fontSize: '0.95rem'
-              }}
-            >
-              Get in touch
-            </a>
-            <a 
-              href="#projects" 
-              className="interactive"
-              style={{
-                fontWeight: 600,
-                fontSize: '0.95rem',
-                color: 'var(--text-primary)',
-                borderBottom: '1px solid var(--text-primary)',
-                paddingBottom: '0.2rem'
-              }}
-            >
-              View Work
-            </a>
+            <CommandButton text="View Work" href="#projects" />
           </motion.div>
+
         </motion.div>
+        
+        <ScrollIndicator />
       </div>
     </section>
   );

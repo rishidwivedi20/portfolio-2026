@@ -1,38 +1,113 @@
-import React from 'react';
-import CustomCursor from './components/CustomCursor';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+import Loader from './components/Loader';
+import Navigation from './components/Navigation';
 import Hero from './components/Hero';
 import BentoGrid from './components/BentoGrid';
+import Skills from './components/Skills';
+import CodingProfiles from './components/CodingProfiles';
+import Education from './components/Education';
 import Projects3D from './components/Projects3D';
+import Footer from './components/Footer';
+import BackgroundCanvas from './components/BackgroundCanvas';
+import TelemetryHUD from './components/TelemetryHUD';
+import SocialDock from './components/SocialDock';
+import ThemeSwitcher from './components/ThemeSwitcher';
+
+import { heroAnimation } from './utils/animations';
+
+const FadeInSection = ({ children, delay = 0 }) => {
+  // We can customize the variant's delay dynamically
+  const variant = {
+    hidden: heroAnimation.hidden,
+    show: {
+      ...heroAnimation.show,
+      transition: {
+        ...heroAnimation.show.transition,
+        delay: delay
+      }
+    }
+  };
+
+  return (
+    <motion.div
+      variants={variant}
+      initial="hidden"
+      whileInView="show"
+      viewport={{ once: true, margin: "-100px" }}
+    >
+      {children}
+    </motion.div>
+  );
+};
 
 function App() {
+  const [scrolled, setScrolled] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [themeColor, setThemeColor] = useState('#10b981'); // Defaulting to green
+
+  useEffect(() => {
+    document.documentElement.style.setProperty('--accent-primary', themeColor);
+  }, [themeColor]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
     <>
-      <CustomCursor />
-      
-      {/* Refined Navigation */}
-      <nav style={{ padding: '2rem 0', position: 'absolute', width: '100%', zIndex: 10 }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <div style={{ fontWeight: 700, letterSpacing: '-0.05em', fontSize: '1.2rem' }}>RD.</div>
-          <div style={{ display: 'flex', gap: '2rem', fontSize: '0.9rem', color: 'var(--text-secondary)' }}>
-            <a href="#about" className="interactive" style={{ transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>About</a>
-            <a href="#projects" className="interactive" style={{ transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Work</a>
-            <a href="mailto:rishidwi2003@gmail.com" className="interactive" style={{ transition: 'color 0.2s' }} onMouseEnter={(e) => e.target.style.color = 'var(--text-primary)'} onMouseLeave={(e) => e.target.style.color = 'var(--text-secondary)'}>Contact</a>
-          </div>
-        </div>
-      </nav>
+      <ThemeSwitcher currentThemeColor={themeColor} setThemeColor={setThemeColor} />
+      <BackgroundCanvas themeColor={themeColor} />
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <Loader key="loader" onComplete={() => setIsLoading(false)} />
+        ) : (
+          <motion.div
+            key="main"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.8, ease: "easeInOut" }}
+          >
+            <TelemetryHUD themeColor={themeColor} />
+            <SocialDock />
+            <Navigation scrolled={scrolled} />
 
-      <main>
-        <Hero />
-        <BentoGrid />
-        <Projects3D />
-      </main>
-      
-      {/* Minimal Footer */}
-      <footer style={{ padding: '4rem 0', borderTop: '1px solid var(--border-subtle)', textAlign: 'center', color: 'var(--text-muted)', fontSize: '0.85rem' }}>
-        <div className="container">
-          <p>© {new Date().getFullYear()} Rishi Dwivedi. Crafted with minimal elegance.</p>
-        </div>
-      </footer>
+            <main>
+              <Hero />
+              
+              <FadeInSection>
+                <BentoGrid />
+              </FadeInSection>
+              
+              <FadeInSection>
+                <Projects3D />
+              </FadeInSection>
+              
+              <FadeInSection>
+                <CodingProfiles />
+              </FadeInSection>
+              
+              <FadeInSection>
+                <Education />
+              </FadeInSection>
+              
+              <FadeInSection>
+                <Skills />
+              </FadeInSection>
+              
+              <FadeInSection>
+                <Footer />
+              </FadeInSection>
+            </main>
+            
+
+          </motion.div>
+        )}
+      </AnimatePresence>
     </>
   );
 }

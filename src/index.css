@@ -1,9 +1,9 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap');
 
 :root {
   --bg-dark: #0f1011;
-  --bg-card: #18191b;
-  --bg-card-hover: #1f2124;
+  --bg-card: rgba(24, 25, 27, 0.4); /* Glassmorphism */
+  --bg-card-hover: rgba(31, 33, 36, 0.6);
   --text-primary: #f2f2f2;
   --text-secondary: #a1a1aa;
   --text-muted: #71717a;
@@ -12,11 +12,12 @@
   --accent-secondary: #577e77; /* Sage green */
   --accent-tertiary: #d1b16c; /* Soft gold */
   
-  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.05);
   --border-focus: rgba(255, 255, 255, 0.15);
   
   --font-sans: 'Inter', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
+  --font-heading: 'Bebas Neue', sans-serif;
   
   --radius-sm: 8px;
   --radius-md: 16px;
@@ -30,32 +31,24 @@
 }
 
 html, body {
-  background-color: var(--bg-dark);
+  background-color: transparent;
   color: var(--text-primary);
   font-family: var(--font-sans);
   line-height: 1.6;
   overflow-x: hidden;
-  cursor: none; /* For custom cursor */
+  pointer-events: none;
+  scroll-behavior: smooth;
 }
 
-/* Subtle noise texture */
-body::before {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  pointer-events: none;
-  background-image: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.85" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.05"/%3E%3C/svg%3E');
-  z-index: 50;
-  opacity: 0.8;
+a, button, input, .bento-item, .interactive {
+  pointer-events: auto; /* Re-enable for UI elements */
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 600;
-  line-height: 1.2;
-  letter-spacing: -0.02em;
+  font-family: var(--font-heading);
+  font-weight: 400; /* Bebas Neue is naturally bold/400 */
+  line-height: 1.1;
+  letter-spacing: 0.05em; /* Bebas Neue looks better with slight positive spacing */
 }
 
 a {
@@ -86,9 +79,24 @@ ul {
 
 /* Layout Utilities */
 .container {
-  max-width: 1200px;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 1000px;
+  margin-left: max(6rem, 12vw);
+  margin-right: auto;
   padding: 0 2rem;
+}
+
+@media (max-width: 1024px) {
+  .container {
+    margin-left: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    margin: 0 auto;
+    padding: 0 1.5rem;
+  }
 }
 
 .section {
@@ -104,6 +112,8 @@ ul {
 
 .bento-item {
   background-color: var(--bg-card);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-md);
   padding: 2rem;
@@ -116,44 +126,4 @@ ul {
   border-color: var(--border-focus);
 }
 
-/* Custom Cursor */
-.cursor-dot {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 8px;
-  height: 8px;
-  background-color: var(--text-primary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9999;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, background-color 0.2s;
-}
 
-.cursor-outline {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 40px;
-  height: 40px;
-  border: 1px solid var(--text-secondary);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 9998;
-  transform: translate(-50%, -50%);
-  transition: width 0.2s, height 0.2s, border-color 0.2s;
-}
-
-.cursor-hover .cursor-dot {
-  width: 0;
-  height: 0;
-}
-
-.cursor-hover .cursor-outline {
-  width: 60px;
-  height: 60px;
-  background-color: rgba(255, 255, 255, 0.05);
-  border-color: var(--text-primary);
-  backdrop-filter: blur(2px);
-}
