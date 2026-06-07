@@ -33,8 +33,8 @@ const projects = [
     title: 'Sorting Visualizer',
     desc: 'Interactive application visualizing sorting algorithms in real-time with adjustable parameters.',
     tech: ['React', 'Algorithms', 'CSS'],
-    github: 'https://github.com/rishidwivedi20',
-    live: '#'
+    github: 'https://github.com/rishidwivedi20/The-Sort-Lab',
+    live: 'https://the-sort-lab-mauve.vercel.app/'
   },
   {
     title: 'E-Commerce Platform',
