@@ -1,0 +1,16 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "rimigo-dev",
+      "runtimeExecutable": "C:\\PROGRA~1\\nodejs\\node.exe",
+      "runtimeArgs": [
+        "E:\\rimigo assignment\\node_modules\\vite\\bin\\vite.js",
+        "--config",
+        "E:\\rimigo assignment\\vite.config.js"
+      ],
+      "port": 5173,
+      "autoPort": false
+    }
+  ]
+}
