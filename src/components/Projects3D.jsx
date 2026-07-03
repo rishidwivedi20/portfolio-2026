@@ -30,11 +30,11 @@ const projects = [
     live: 'https://inbox-ai-lake.vercel.app'
   },
   {
-    title: 'Sorting Visualizer',
-    desc: 'Interactive application visualizing sorting algorithms in real-time with adjustable parameters.',
-    tech: ['React', 'Algorithms', 'CSS'],
+    title: 'The Sort Lab',
+    desc: 'Interactive sorting algorithm platform with real-time visualization, benchmarking, and side-by-side performance analysis.',
+    tech: ['React', 'TypeScript', 'Web Workers'],
     github: 'https://github.com/rishidwivedi20/The-Sort-Lab',
-    live: 'https://the-sort-lab-mauve.vercel.app/'
+    live: 'https://the-sort-lab-mauve.vercel.app'
   },
   {
     title: 'SocialEcho',
