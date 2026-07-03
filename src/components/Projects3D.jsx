@@ -23,11 +23,11 @@ const GithubIcon = ({ size = 24, color = "currentColor" }) => (
 
 const projects = [
   {
-    title: 'SocialEcho',
-    desc: 'Full-stack content publishing platform with AI moderation, JWT auth, and rich text editing.',
-    tech: ['React', 'Node.js', 'MongoDB'],
-    github: 'https://github.com/rishidwivedi20',
-    live: '#'
+    title: 'InboxAI',
+    desc: 'SaaS platform automating personalized AI-generated newsletters with intelligent curation and scheduling.',
+    tech: ['Next.js', 'Supabase', 'Groq AI'],
+    github: 'https://github.com/rishidwivedi20/InboxAI',
+    live: 'https://inbox-ai-lake.vercel.app'
   },
   {
     title: 'Sorting Visualizer',
@@ -37,9 +37,9 @@ const projects = [
     live: 'https://the-sort-lab-mauve.vercel.app/'
   },
   {
-    title: 'E-Commerce Platform',
-    desc: 'Modern storefront with Stripe integration, cart management, and admin dashboard.',
-    tech: ['Next.js', 'PostgreSQL', 'Stripe'],
+    title: 'SocialEcho',
+    desc: 'Full-stack content publishing platform with AI moderation, JWT auth, and rich text editing.',
+    tech: ['React', 'Node.js', 'MongoDB'],
     github: 'https://github.com/rishidwivedi20',
     live: '#'
   },
